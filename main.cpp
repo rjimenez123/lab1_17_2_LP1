@@ -8,10 +8,10 @@ void print_line(char, int);
 
 int main(int argc, char** argv) {
     
-    char m, m1, code_char, client_code[7];
+    char m, m1, m2, m3, code_char, client_code[7];
     char lastname1[20], lastname2[20], names[25];
-    double amount;
-    int a, b, c, items_read; // los uso para fecha u hora
+    double amount, op_amount;
+    int dd, mm, aa, hs, ms, ss, items_read; // los uso para fecha u hora
     int op, dec_op_amount; // signo de la operacion D o R
     
     while((m = getchar()) != EOF) {
@@ -65,37 +65,55 @@ int main(int argc, char** argv) {
         printf("%10.2lf\n", amount);
         
         
-        // Leer fecha y todo lo demas
-        while (1) {
-            putchar(' ');
-            m = getchar();
-            if ( m == EOF) return 0;
-            else ungetc(m, stdin);
+        while (1) { // Leer FECHA y todo lo demas
+            scanf("%d%*c%d%*c%d", &dd, &mm, &aa); // leer fecha
+            printf("Es una fecha: %02d-%02d-%04d ", dd, mm, aa);
             
-            items_read = scanf("%d%*c%d%*c%d%*c", &a, &b, &c);
-            if (items_read == 3) { // es fecha u hora
-                if (c < 100) 
-                    printf("Es una hora: %02d-%02d-%02d", a, b, c);
-                else
-                    printf("Es una fecha: %02d-%02d-%04d", a, b, c);
-            }
-            else if (items_read == 0) { // Puede ser un codigo o D/R
-                m = getchar(); m1 = getchar();
-                if (m1 == ' ') { // es D(op = +1) o R(op = -1)
-                    op = (m == 'D' ? 1 : -1); 
-                    printf("%d", op);
-                }
-                else { // es un código
-                    ungetc(m, stdin);
-                    ungetc(m1, stdin);
+            while (1) { // Leer "D/R - HORA - MONTO DE OPERACION"
+                // Leo D/R y lo imprimo
+                m1 = getchar();
+                op = (m1 == 'D' ? 1 : -1);
+                printf("%c ", m1);
+                
+                while (1) { // Leer la tupla "HORA - MONTO DE OPERACION"
+                    items_read = scanf("%d%*c%d%*c%d", &hs, &ms, &ss);
+                    if (items_read == 3) { // HORA o FECHA
+                        if (ss < 100) {
+                            printf("Es una hora: %02d-%02d-%02d ", hs, ms, ss);
+                            continue;
+                        }
+                        else 
+                            break;
+                    } else if (items_read == 1){ // MONTO OPERACION y en hs tengo la parte entera del monto de la operacion
+                        dec_op_amount;
+                        scanf("%*c%d", dec_op_amount);
+                        op_amount = hs + dec_op_amount / 100.0;
+                        printf("Monto operacion: %8.2lf ", op*op_amount);
+                        continue;
+                    } else if (items_read == 0) { // EOF o CODIGO o D/R
+                        m2 = getchar();
+                        m3 = getchar();
+                        if (m2 == EOF)
+                            return 0;
+                        else { // ESTO ES SI ENCUENTRA UN CODIGO O D/R
+                            ungetc(m2, stdin);
+                            ungetc(m3, stdin);
+                            break;
+                        }
+                    }
                     break;
                 }
-            } else { // es un monto a retirar o depositar
-                printf("MONTO!");
-                scanf("%d", &dec_op_amount);
-                printf("Es un monto a retirar o depositar: %d.%d", a*op, dec_op_amount);
+                m2 = getchar(); m3 = getchar();
+                if (m3 == ' '){ // Es un D/R y debe seguir este while
+                    ungetc(m2, stdin);
+                    ungetc(m3, stdin);
+                    continue;
+                } else { // Es otro CODIGO o FECHA y debemos romper este while que comienza en D/R
+                    break;
+                }
+                
             }
-            printf("\n");
+            break; // solo puede ser un codigo y no debo leer fecha.
         }
     }
     
