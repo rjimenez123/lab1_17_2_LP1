@@ -1,0 +1,21 @@
+AMR321 TELLO ASENCIO JENNIFER-ANDREA    2000.50
+ Es una fecha: 25-03-2019
+ 1
+ Es una hora: 12-32-42
+ Es una hora: 500-13-32
+ Es una hora: 42-500-14
+ Es una fecha: 32-42-0200
+ -1
+ Es una hora: 17-42-23
+ MONTO!Es un monto a retirar o depositar: -1200.0
+ MAR123 JIMENEZ ANTUNEZ RENZO    1500.40
+ Es una fecha: 25-03-2019
+ 1
+ Es una hora: 12-32-42
+ Es una hora: 500-13-32
+ Es una hora: 42-500-14
+ Es una fecha: 32-42-0200
+ -1
+ Es una hora: 17-42-23
+ MONTO!Es un monto a retirar o depositar: -200.0
+ 

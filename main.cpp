@@ -8,9 +8,11 @@ void print_line(char, int);
 
 int main(int argc, char** argv) {
     
-    char m, code_char, client_code[7];
+    char m, m1, code_char, client_code[7];
     char lastname1[20], lastname2[20], names[25];
-    double mount;
+    double amount;
+    int a, b, c, items_read; // los uso para fecha u hora
+    int op, dec_op_amount; // signo de la operacion D o R
     
     while((m = getchar()) != EOF) {
         
@@ -59,9 +61,44 @@ int main(int argc, char** argv) {
         putchar(' ');
         
         // Leer el monto
-        scanf("%lf", &mount);
-        printf("%10.2lf", mount);
+        scanf("%lf", &amount);
+        printf("%10.2lf\n", amount);
+        
+        
+        // Leer fecha y todo lo demas
+        while (1) {
+            putchar(' ');
+            m = getchar();
+            if ( m == EOF) return 0;
+            else ungetc(m, stdin);
+            
+            items_read = scanf("%d%*c%d%*c%d%*c", &a, &b, &c);
+            if (items_read == 3) { // es fecha u hora
+                if (c < 100) 
+                    printf("Es una hora: %02d-%02d-%02d", a, b, c);
+                else
+                    printf("Es una fecha: %02d-%02d-%04d", a, b, c);
+            }
+            else if (items_read == 0) { // Puede ser un codigo o D/R
+                m = getchar(); m1 = getchar();
+                if (m1 == ' ') { // es D(op = +1) o R(op = -1)
+                    op = (m == 'D' ? 1 : -1); 
+                    printf("%d", op);
+                }
+                else { // es un código
+                    ungetc(m, stdin);
+                    ungetc(m1, stdin);
+                    break;
+                }
+            } else { // es un monto a retirar o depositar
+                printf("MONTO!");
+                scanf("%d", &dec_op_amount);
+                printf("Es un monto a retirar o depositar: %d.%d", a*op, dec_op_amount);
+            }
+            printf("\n");
+        }
     }
+    
     
     
     return 0;
