@@ -1,0 +1,22 @@
+CODIGO 		APELLIDO1/APELLIDO2/NOMBRESS 	MONTO_CUENTA
+  FECHA --> D/R  HORA_MINUTO	Monto_Operacion
+				 HORA_MINUTO	Monto_Operacion
+				 HORA_MINUTO	Monto_Operacion
+			D/R  HORA_MINUTO	Monto_Operacion
+				 HORA_MINUTO	Monto_Operacion
+				 HORA_MINUTO	Monto_Operacion
+  FECHA --> D/R  HORA_MINUTO	Monto_Operacion
+				 HORA_MINUTO	Monto_Operacion
+				 HORA_MINUTO	Monto_Operacion
+			D/R  HORA_MINUTO	Monto_Operacion
+				 HORA_MINUTO	Monto_Operacion
+				 HORA_MINUTO	Monto_Operacion
+				 
+CODIGO ..........
+
+Voy a leer la fecha u hora como 3 integers:
+Despues de un monto sigue: 	1. HORA_MINUTO	(Lee 3 valores)
+							2. D/R 			(Lee 0 valores)
+							3. CODIGO 		(Lee 0 valores)
+							4. FECHA 		(Lee 3 valores)
+							5. EOF 			(Lee 0 valores)
